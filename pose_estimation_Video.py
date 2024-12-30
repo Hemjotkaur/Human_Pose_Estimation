@@ -1,7 +1,5 @@
 import cv2
 import numpy as np
-import matplotlib.pyplot as plt
-
 
 BODY_PARTS = { "Nose": 0, "Neck": 1, "RShoulder": 2, "RElbow": 3, "RWrist": 4,
                "LShoulder": 5, "LElbow": 6, "LWrist": 7, "RHip": 8, "RKnee": 9,
@@ -24,11 +22,9 @@ net = cv2.dnn.readNetFromTensorflow("graph_opt.pb")
 
 thres = 0.2
 
-cap = cv2.VideoCapture("run1.mp4")
+cap = cv2.VideoCapture("Demo-video-run1.mp4")
 
 def pose_estimation(cap):
-    
-    
     
     while(cap.isOpened()):
         
@@ -45,11 +41,9 @@ def pose_estimation(cap):
     
         assert(len(BODY_PARTS) == out.shape[1])
     
-        points = []
-        
-        
+        points = []  
         for i in range(len(BODY_PARTS)):
-            # Slice heatmap of corresponging body's part.
+          
             heatMap = out[0, i, :, :]
 
             _, conf, _, point = cv2.minMaxLoc(heatMap)
@@ -71,7 +65,7 @@ def pose_estimation(cap):
                 cv2.ellipse(frame, points[idFrom], (3, 3), 0, 0, 360, (0, 0, 255), cv2.FILLED)
                 cv2.ellipse(frame, points[idTo], (3, 3), 0, 0, 360, (0, 0, 255), cv2.FILLED)
                 
-        t, _ = net.getPerfProfile()
+        
         img = frame
         
         
@@ -86,8 +80,6 @@ def pose_estimation(cap):
     cv2.destroyAllWindows()
     
         
-    
-
 output = pose_estimation(cap = cap)
 
 
