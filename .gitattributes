@@ -1,0 +1,10 @@
+*.jpg linguist-detectable=false
+*.png linguist-detectable=false
+*.gif linguist-detectable=false
+*.mp4 linguist-detectable=false
+*.pb linguist-detectable=false
+
+*.py linguist-language=Python
+
+*.md linguist-language=Markdown
+*.txt linguist-language=Text
